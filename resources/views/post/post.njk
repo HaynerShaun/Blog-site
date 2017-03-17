@@ -1,0 +1,21 @@
+<!-- post displays a specific post's details and gives the current user the option to edit or delete the post
+        if the current user originally posted it -->
+
+{% extends 'post/header' %}
+
+{% block display %}
+    <div>
+      <a href="/post/feed"> Back </a>
+    </div>
+    <hr>
+    <div class="posts-wrapper" id="post_display" >
+        <div class='post'>
+            <h2> {{ post.title }} </h2> 
+            <p> {{ post.content }} </p>
+            {% if post.user_id == currentUser.id %}
+                <p><a href='/post/edit/{{ post.id }}'> Edit </a></p>
+                <p><a href='/post/delete/{{ post.id }}'> Delete </a></p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

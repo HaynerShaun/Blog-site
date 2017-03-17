@@ -1,38 +1,51 @@
-<!doctype html>
+<!-- Master sets up the top nav bar for all pages that extend it -->
+
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-  <title>AdonisJs - Node.Js MVC Framework</title>
-
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900' rel='stylesheet' type='text/css'>
-  <link rel="icon" href="/assets/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function unhide(section){
+            var element = document.getElementById(section);
+            element.style.visibility = "visible";
+        }
+        function hide(section){
+            var element = document.getElementById(section);
+            element.style.visibility = "hidden";
+        }
+    </script>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-
-  <section>
-    <div class="__wrapper">
-      {% block content %}{% endblock %}
-
-      {% block footer %}
-        <div class="__footer">
-          <ul>
-            <li>
-              <a href="https://twitter.com/intent/tweet?url=http://adonisjs.com&text=I am using AdonisJs, a practical MVC framework for nodejs&hashtags=nodejs,adonisframework" target="_blank">
-                <img src="/assets/twitter.svg">
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/adonisjs/adonis-framework" target="_blank"><img src="/assets/github.svg"></a>
-            </li>
-          </ul>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                {% if currentUser %}
+                    <a class="navbar-brand" href="/user/profile">{{ currentUser.display_name }}</a>
+                {% else %}
+                    <a class="navbar-brand" href="/auth/login">Hayner's Blog Site</a>
+                {% endif %}
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                {% if currentUser %}
+                    <li><a href="/user/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                {% else %}
+                    <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="/auth/register"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
+                {% endif %}
+            </ul>
         </div>
-      {% endblock %}
-    </div>
-  </section>
+    </nav>
+
+    <section>
+        {% block content %}{% endblock %}
+    </section>
 
 </body>
 </html>

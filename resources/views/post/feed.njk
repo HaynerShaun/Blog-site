@@ -1,0 +1,42 @@
+<!-- feed displays all the current user's posts as well as any post of the users they're following -->
+
+{% extends 'post/header' %}
+
+{% block display %}
+    <div class="input-group">
+        <form>
+            {{ csrfField }}
+            <table>
+                <tr>
+                    <td>
+                        <input type="text" name="search" id="search_field" class="form-control" placeholder="Search Blog..">
+                    </td>
+                    <td>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit" formmethod="POST" formaction="PostsController.search">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        <form>
+    </div>
+    <hr>
+    <div>
+        <a href="/post/create" class="btn btn-default" role="button">Create New Post</a>
+    </div>
+    <div class="posts-wrapper" id="post_display" >
+        {% for post in posts %} 
+            <div class='post'>
+                <h2><a href='/post/post/{{ post.id }}'> {{ post.title }} </a></h2> 
+                <p> {{ post.content }} </p>
+                <p><small>Posted by: {{ post.created_at }} by 
+                    <a href="/user/user/{{ post.display_name }}"> {{ post.display_name }} </a>
+                </small></p>
+            </div>
+        {% else %}
+            <h2> No posts found </h2>
+        {% endfor %}
+    </div>
+{% endblock %}

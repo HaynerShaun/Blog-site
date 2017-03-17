@@ -1,0 +1,17 @@
+<!-- newFollowers displays any users that the current user is not following -->
+
+{% extends 'follower/followerPage' %}
+
+{% block followers %}
+    <div class="followers-wrapper">
+        {% for follower in notFollowing %} 
+            <div class="follower">
+                <h2><a href="/user/user/{{ follower.display_name }}"> {{ follower.display_name }} </a></h2> 
+                <p> {{ follower.email }} </p>
+                <p><a href="/follower/follow/{{ follower.id }}"> Follow </a></p>
+            </div>
+        {% else %}
+            <h2> You are currently following all other users </h2>
+        {% endfor %}
+    </div>
+{% endblock %}

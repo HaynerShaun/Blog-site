@@ -1,0 +1,16 @@
+<!-- followers displays any users that are following the current user -->
+
+{% extends 'follower/followerPage' %}
+
+{% block followers %}
+    <div class="followers-wrapper">
+        {% for follower in all_followers %} 
+            <div class="follower">
+                <h2> {{ follower.display_name }} </h2> 
+                <p> {{ follower.email }} </p>
+            </div>
+        {% else %}
+            <h2> No followers found </h2>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+<!-- profile displays the current user's profile information and gives options to edit and delete the profile -->
+
+{% extends 'user/master' %}
+
+{% block users %}
+    <div>
+        <h1>{{ currentUser.display_name }}</h1>
+        <p>{{ currentUser.first_name }} {{ currentUser.last_name }}</p>
+        <p>{{ currentUser.email }}</p>
+    </div>
+    <br><br><br><br>
+
+    <a href="/user/edit" class="btn btn-info" role="button">Edit profile</a>
+    <button type="button" class="btn btn-danger" onclick="unhide('deleteUser')">Delete Profile</button>
+    <span id="deleteUser" style="visibility: hidden;">
+        <span style="font-weight: bold;">Are you sure?</span>
+        <a href="/user/delete" class="btn btn-success" role="button">Yes</a>
+        <button type="button" class="btn btn-danger" onclick="hide('deleteUser')">No</button>
+    </span>
+{% endblock %}

@@ -1,0 +1,20 @@
+<!-- user displays a user's display name and all the posts they have posted -->
+
+{% extends 'user/master' %}
+
+{% block users %}
+    <div>
+        <div class='user'>
+            <h2> {{ posts.display_name }}'s Posts </h2> <br>
+        </div>
+        {% for post in posts %} 
+            <div class='post'>
+                <h3> {{ post.title }} </h3> 
+                <p> {{ post.content }} </p>
+                <p><small>Posted: {{ post.created_at }} </small></p>
+            </div>
+        {% else %}
+            <h3> This user has not posted anything yet </h3>
+        {% endfor %}
+    </div>
+{% endblock %}

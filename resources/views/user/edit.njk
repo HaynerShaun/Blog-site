@@ -1,0 +1,37 @@
+<!-- edit displays a form to allow editing of the current user's profile -->
+
+{% extends 'user/master' %}
+
+{% block users %}
+    <div>
+      <a href="/user/profile"> Back </a>
+    </div>
+    <hr>
+    <h2>You can edit your profile here</h2>
+    {{ form.open({action: 'UserController.updateProfile' }) }}
+
+        {{ csrfField }}
+
+        <fieldset class="form-group">
+            {{ form.label('Email') }}
+            {{ form.text('email', currentUser.email, { class: 'form-control' }) }}
+        </fieldset>
+
+        <fieldset class="form-group">
+            {{ form.label('Display Name') }}
+            {{ form.text('display_name', currentUser.display_name, { class: 'form-control' }) }}
+        </fieldset>
+
+        <fieldset class="form-group">
+            {{ form.label('First Name') }}
+            {{ form.text('first_name', currentUser.first_name, { class: 'form-control' }) }}
+        </fieldset>
+
+        <fieldset class="form-group">
+            {{ form.label('Last Name') }}
+            {{ form.textarea('last_name', currentUser.last_name, { class: 'form-control' }) }}
+        </fieldset>
+
+        {{ form.submit('Update', 'update', { class: 'btn btn-primary btn-block' }) }}
+    {{ form.close() }}
+{% endblock %}

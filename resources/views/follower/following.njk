@@ -1,0 +1,16 @@
+<!-- following displays all the users that the current user is following -->
+
+{% extends 'follower/followerPage' %}
+
+{% block followers %}
+    <div class="followers-wrapper">
+        {% for follower in following %} 
+            <div class="follower">
+                <h2> {{ follower.display_name }} </h2>
+                <p><a href="/follower/unfollow/{{ follower.id }}"> Unfollow </a></p>
+            </div>
+        {% else %}
+            <h2> Not following any users </h2>
+        {% endfor %}
+    </div>
+{% endblock %}

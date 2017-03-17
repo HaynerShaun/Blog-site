@@ -1,0 +1,31 @@
+<!-- edit displays a form to edit a specific post -->
+
+{% extends 'post/header' %}
+
+{% block display %}
+    <div>
+      <a href="/post/feed"> Back </a>
+    </div>
+    <hr>
+    <h2>You can edit your post here</h2>
+    {{ form.open({action: 'PostsController.edit', params: {id: post.id} }) }}
+
+        {{ csrfField }}
+
+        <fieldset class="form-group">
+            {{ form.hidden('id', post.id, { class: 'form-control' }) }}
+        </fieldset>
+
+        <fieldset class="form-group">
+            {{ form.label('Post Title') }}
+            {{ form.text('title', post.title, { class: 'form-control' }) }}
+        </fieldset>
+
+        <fieldset class="form-group">
+            {{ form.label('Description') }}
+            {{ form.textarea('content', post.content, { class: 'form-control' }) }}
+        </fieldset>
+
+        {{ form.submit('Update', 'update', { class: 'btn btn-primary btn-block' }) }}
+    {{ form.close() }}
+{% endblock %}
